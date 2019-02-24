@@ -1,5 +1,9 @@
 #!/bin/sh
 
+echo "## docker-compose up -d"
+docker-compose up -d
+
+echo
 echo "### Be sure to login docker before this script execution ###"
 for f in tododb todoapi todonginx todoweb nginx-nuxt; do
     if [ $f = "nginx-nuxt" ]; then

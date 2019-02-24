@@ -9,6 +9,9 @@ docker container exec -it manager docker stack ps $system --filter "desired-stat
 echo 
 echo "In order to check if it works, IN THE API CONTAINER you should execute the fowllowing cmd lines"
 echo "                                      ~~~~~~~~~~~~~"
-echo "apt-get update"
-echo "apt-get install jq"
-echo "curl -s -XGET http://localhost:8080/todo?status=TODO | jq . "
+echo "apt-get update && apt-get install jq && curl -s -XGET http://localhost:8080/todo?status=TODO | jq . "
+echo
+echo 
+echo "Or, in order to check if it works, IN THE NGINX CONTAINER you should execute the fowllowing cmd lines"
+echo "                                          ~~~~~~~~~~~~~~~"
+echo "apt-get update && apt-get install jq curl && curl -s -XGET http://localhost:80/todo | jq ."

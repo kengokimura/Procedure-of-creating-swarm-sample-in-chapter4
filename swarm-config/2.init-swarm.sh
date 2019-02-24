@@ -1,6 +1,12 @@
 #!/bin/bash
 
+usage_exit() {
+     echo "Usage: $0 [-i|-s]"
+     exit 1
+}
+
 TOKEN=
+FALG=false
 
 while getopts is option
 do
@@ -18,18 +24,25 @@ do
       echo "## docker container exec -it worker03 docker swarm join --token $TOKEN manager:2377"
       docker container exec -it worker03 docker swarm join --token $TOKEN manager:2377
       echo "## docker container exec -it manager docker stack deploy -c /stack/visualizer.yml visualizer"
-      docker container exec -it manager docker stack deploy -c /stack/visualizer.yml visualizer;;
+      docker container exec -it manager docker stack deploy -c /stack/visualizer.yml visualizer
+      FLAG=true;;
     s)
       echo '-s option. The token is as follows...'
       echo "## docker container exec -it manager docker swarm join-token manager"
-      docker container exec -it manager docker swarm join-token manager;;
+      docker container exec -it manager docker swarm join-token manager
+      FLAG=true;;
     \?)
-       echo "Usage: $0 [-i|-s]"
-       exit 1;;
+      usage_exit
+      ;;
     esac
 done
 
+if [ -z $FLAG  ]; then
+   usage_exit
+fi
 
+echo
+echo "checking if other options are spcefied..."
 echo "## shift \`expr \"$OPTIND\" - 1\`"
 shift `expr "$OPTIND" - 1`
 if [ $# -ge 1 ]; then
