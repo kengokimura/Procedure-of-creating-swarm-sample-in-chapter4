@@ -9,4 +9,4 @@
 	url = https://github.com/gihyodocker/todonginx
 [submodule "todoweb"]
 	path = todoweb
-	url = https://github.com/gihyodocker/todonweb
+	url = https://github.com/gihyodocker/todoweb
